@@ -1,6 +1,6 @@
 interFace:
   # 接口名称
-  name: Hello
+  name: Wind
   
   # rpc 服务 远程地址（客户端需要）
   remote: http://127.0.0.1:9000
@@ -10,11 +10,8 @@ interFace:
 
   # 生成 rpc 客户端文件地址
   client:
-    controller: hello
+    controller: wind
 method:
-  hello:
-    req: HelloRequest
-    res: HelloResponse
   Blow:
     req: BlowRequest
     res: BlowResponse

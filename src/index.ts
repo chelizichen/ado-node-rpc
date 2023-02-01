@@ -1,8 +1,8 @@
 import { RpcServerModules,RpcServerBoost } from "ado-node";
-import { HelloInterFace } from "./server/HelloInterFace.server";
-
+import { Hello } from "./server/Hello.server";
+import { Wind } from "./server/Wind.server";
 @RpcServerModules({
-  RpcServerController: [HelloInterFace],
+  RpcServerController: [Hello,Wind],
 })
 class TestRpcServerModules {
   constructor() {

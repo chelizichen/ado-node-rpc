@@ -8,9 +8,9 @@ module.exports =  ({
     port: 3306,
     connectionLimit: 10,
   },
-  server: {
+  microService: {
     port: 10012,
     host: "127.0.0.1",
-    desc:"微服务 描述 字段"
+    desc: "测试微服务描述"
   }
-});
+})

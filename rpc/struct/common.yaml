@@ -8,3 +8,11 @@ struct:
   HelloResponse:
     message: string
 
+
+  BlowRequest: 
+    name: string
+    age: string
+    value: string
+  
+  BlowResponse:
+    message: string

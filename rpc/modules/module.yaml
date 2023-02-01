@@ -2,6 +2,7 @@ module:
   # 模块接口
   interFace:
     - Hello
+    - Wind
   # 模块需要的结构体参数
   struct:
     - common
