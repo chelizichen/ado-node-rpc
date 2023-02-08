@@ -7,50 +7,43 @@
 - [Ado-Java-RPC](https://github.com/chelizichen/ado-java-rpc) Java 微服务模块 示例代码
 - [Ado-Node-RPC](https://github.com/chelizichen/ado-node-rpc) NodeJs 微服务模块 示例代码
 
-
 ## Doc
 
-- Class ArcBaseServer
-- @Decorator ArcServerApplication (port:int)
-- 启动Java服务所需的基类和注解
-````Java
-@ArcServerApplication(port = 9811)
-public class ArcServer extends ArcBaseServer {
-    public static void main(String[] args) {
-        ArcServer c = new ArcServer();
-        final Hello hello = new Hello();
-        final Test test = new Test();
-        c.boost(ArcServer.class);
+- @Decorator RpcServerController(interFace:String) 提供远程调用的接口名
+
+````TypeScript
+@RpcServerController("Hello")
+class Hello {
+    @Register("hello")
+    async hello(name:string,age:string,value:string):Promise<{message:string}>{
+        let message = name + age + value
+        return { message };
+    }
+
+    @Register("Blow")
+    async Blow(name:string,age:string,value:string):Promise<{message:string}>{
+        let message = name + age + value
+        return { message };
     }
 }
 
 ````
 
-- @Decorator @ProxyInterFace(interFace:String) 提供远程调用的接口名
-- ArcInterFace 每个远程调用的接口类需要继承的父类
-````Java
-@ProxyInterFace(interFace = "HelloInterFace")
-public class Hello extends ArcInterFace {
+- @RpcServerModules({RpcServerController:[]})
+- 启动Nodejs服务所需的装饰器
 
-    public ret hello(String[] args){
-        System.out.println(args);
-        for (String s:args){
-            System.out.println(s);
-        }
-        final Object o = JSONObject.toJSONString(args);
-        ret success = ret.success(o);
-        return success;
-    }
-
-    public ret say(String[] args){
-
-        HashMap<String, String> hmp = new HashMap();
-        hmp.put("a","1");
-        hmp.put("b","2");
-        hmp.put("c","3");
-        ret success = ret.success(hmp);
-        return success;
-    }
+````TypeScript
+@RpcServerModules({
+  RpcServerController: [Hello,Wind],
+})
+class TestRpcServerModules {
+  constructor() {
+    setTimeout(()=>{
+      const boost = RpcServerBoost(TestRpcServerModules);
+      boost()
+    },0)
+  }
 }
 
+new TestRpcServerModules()
 ````
